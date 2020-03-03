@@ -3,6 +3,7 @@ import matplotlib
 import csv
 import scanpy as sc
 from scipy.sparse import csr_matrix
+from sklearn import metrics
 matplotlib.use('TkAgg')
 
 
@@ -60,6 +61,11 @@ def merge(files, type='h5ad'):
     return adata_all, sample_count
 
 
+def write_count(count, out_path):
+    with open(out_path, "w") as f:
+        csv_writer = csv.writer(f)
+        csv_writer.writerow(count)
+
 def filt(adata, min_c, min_g):
     sc.pp.filter_genes(adata, min_cells=min_c)
     sc.pp.filter_cells(adata, min_genes=min_g)
@@ -94,3 +100,17 @@ def get_label_by_txt(txtpath):
     for x in f11:
         label.append(x)
     return label
+
+
+def cacu_clustering_metrics(x_list, label, metrics_list):
+    result = []
+    for m in metrics_list:
+        m_list = []
+        if m == 'sh':
+            for x in x_list:
+                m_list.append(metrics.silhouette_score(x, label))
+        elif m == 'ch':
+            for x in x_list:
+                m_list.append(metrics.calinski_harabasz_score(x, label))
+        result.append(m_list)
+    return result
