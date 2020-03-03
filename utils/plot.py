@@ -5,6 +5,7 @@ import csv
 import operator
 import matplotlib.patches as mpatches
 import scanpy as sc
+import numpy as np
 import pre
 from sklearn import preprocessing
 
@@ -102,6 +103,21 @@ def plot_multi(x, color, xy_label, title, fig_size, sub_range, size, sava_path, 
         plt.title(title[i], fontsize=font_size)
     plt.savefig(sava_path)
 
+
+# given expression matrix, gene_list(marker_gene) , plot a heat map
+def plot_expression_matrix(x, gene_index_list, title, save_path, normalize='minmax', cmap = 'Set2'):
+    expression = []
+    for i in range(len(gene_index_list)):
+        expression.append(x[:, gene_index_list[i]])
+    expression = np.array(expression)
+    if normalize == 'minmax':
+        expression = preprocessing.scale(expression)
+    elif normalize == 'zscore':
+        expression = preprocessing.minmax_scale(expression)
+    plt.figure()
+    plt.title(title)
+    plt.imshow(expression, interpolation='nearest', cmap=cmap, origin='lower')
+    plt.savefig(save_path)
 
 
 
