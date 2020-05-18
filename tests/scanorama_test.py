@@ -15,10 +15,10 @@ file8 = base_path+'3k/hg19'
 file9 = base_path + '293t/hg19'
 file10 = base_path + 'jurkat/hg19'
 file11 = base_path + '293t_jurkat_50_50/hg19'
-out_path = '/Users/zhongyuanke/data/result/merge5_scanorama.h5ad'
+out_path = '/Users/zhongyuanke/data/result/merge3_scanorama.h5ad'
 # files = [file1, file2, file4, file5, file6, file7, file8, file9, file10, file11]
-files = [file1, file2, file4, file5, file6]
-
+# files = [file1, file2, file4, file5, file6]
+files = [file1, file4, file5]
 adatas = []
 for i in range(len(files)):
     adatas.append(sc.read_10x_mtx(files[i]))

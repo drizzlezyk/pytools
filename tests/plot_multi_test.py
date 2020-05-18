@@ -1,9 +1,5 @@
 import scanpy as sc
-import plot
-import umap
-import csv
-import operator
-import pre
+from utils import pre, plot
 
 bar = ['c', 'm', 'darkorange', 'darkseagreen', 'r']
 c_map = 'Set2'
@@ -24,19 +20,30 @@ f_size = 16
 # type_fig_path = base_path+'result/293t_jurkat_type.png'
 # orig_umap = base_path+'result/293t_jurkat_umap.h5ad'
 
-file_orig = base_path+'merge_result/merge5.h5ad'
-file_scxx = base_path+'result/merge5_scxx_z2.h5ad'
-file_mse = base_path+'result/merge5_mse_2.h5ad'
-file_dca = base_path+'result/merge5_dca_2.h5ad'
-file_scan = base_path+'result/merge5_scanorama.h5ad'
-batch_path = base_path+'merge_result/merge5.csv'
-batch_fig_path = base_path+'result/test2.png'
-orig_umap = base_path+'result/merge5_umap.h5ad'
+# file_orig = base_path+'merge_result/merge5.h5ad'
+# file_scxx = base_path+'result/merge5_scxx_z2.h5ad'
+# file_mse = base_path+'result/merge5_mse_2.h5ad'
+# file_dca = base_path+'result/merge5_dca_2.h5ad'
+# file_scan = base_path+'result/merge5_scanorama.h5ad'
+# batch_path = base_path+'merge_result/merge5.csv'
+# batch_fig_path = base_path+'result/test2.png'
+# orig_umap = base_path+'result/merge3_umap.h5ad'
 
 # file_orig = base_path+'merge_result/merge9.h5ad'
 # file_scan = base_path+'result/merge9_scanorama.h5ad'
 # batch_path = base_path+'merge_result/merge9.csv'
 # batch_fig_path = base_path+'result/merge9.png'
+
+orig_umap = base_path+'result/merge3_umap.h5ad'
+file_scxx = base_path+'result/merge3_scxx_z2.h5ad'
+file_mse = base_path+'result/merge3_mse.h5ad'
+file_dca = base_path+'result/merge3_dca.h5ad'
+file_scan = base_path + 'result/merge3_scanorama.h5ad'
+batch_path = base_path+'merge_result/cd14_cd34_b_cells.csv'
+
+batch_fig_path = base_path+'gan/merge3_scanorama.png'
+file_gan = base_path+'gan/merge3_gan_20.h5ad'
+
 
 ctype, type_color, batch_color = [], [], []
 # # -------------------------------------------------type
@@ -52,7 +59,6 @@ ctype, type_color, batch_color = [], [], []
 # -------------------------------------------------batch
 
 label = pre.get_label_by_count(batch_path)
-
 
 adata_orig = sc.read_h5ad(orig_umap)
 # sc.pp.filter_genes(adata_orig, min_cells=1500)

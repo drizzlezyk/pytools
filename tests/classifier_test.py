@@ -1,8 +1,7 @@
 import numpy as np
-import pre
-import deep_classifier as dc
+from utils import pre
+from network import deep_classifier as dc
 from keras.utils import to_categorical
-import pandas as pd
 
 base_path = '/Users/zhongyuanke/Documents/course/data_minig/'
 file = base_path + 'result/vae.h5ad'

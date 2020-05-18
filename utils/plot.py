@@ -4,9 +4,8 @@ import seaborn as sns
 import csv
 import operator
 import matplotlib.patches as mpatches
-import scanpy as sc
 import numpy as np
-import pre
+from utils import pre
 from sklearn import preprocessing
 
 sns.set(style='white', rc={'figure.figsize': (8, 6), 'figure.dpi': 150})

@@ -1,4 +1,4 @@
-import pre
+from utils import pre
 
 base_path = '/Users/zhongyuanke/data/pbmc/'
 base_path2 = '/Users/zhongyuanke/data/'
@@ -37,11 +37,17 @@ file10 = base_path + 'jurkat/hg19'
 file11 = base_path + '293t_jurkat_50_50/hg19'
 
 # file10 = base_path + '293t_jurkat_50_50/hg19'
-out_path = base_path2 + 'merge_result/merge11.h5ad'
-count_path = base_path2 + 'merge_result/merge11.csv'
-files = [file1, file2, file3, file4, file5, file6, file7, file8, file9, file10, file11]
-
+out_path = base_path2 + 'merge_result/merge3'
+count_path = base_path2 + 'dann_data/merge2.csv'
+# files = [file1, file2, file4, file5, file6]
+# files = [file9, file10]
+files = [file1, file4, file5]
 adata_all, count = pre.merge(files, '10x_mtx')
-adata_all.write_h5ad(out_path)
-pre.write_count(count, out_path)
+
+print(adata_all.shape)
+# adata_all.write_h5ad(out_path)
+# adata_all.write()
+adata_all.write_loom(out_path)
+# print(count)
+# pre.write_count(count, count_path)
 

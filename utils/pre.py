@@ -46,7 +46,6 @@ def get_label_by_count(label_path):
     for i in range(len(count)):
         for j in range(int(count[i])):
             label.append(i)
-    label = np.array(label)
     return label
 
 
@@ -66,13 +65,14 @@ def write_count(count, out_path):
         csv_writer = csv.writer(f)
         csv_writer.writerow(count)
 
+
 def filt(adata, min_c, min_g):
     sc.pp.filter_genes(adata, min_cells=min_c)
     sc.pp.filter_cells(adata, min_genes=min_g)
     return adata
 
 
-def write_merge_label(count,labels,path):
+def write_merge_label(count, labels, path):
     res=[]
     for i in range(len(count)):
         for j in range(count[i]):

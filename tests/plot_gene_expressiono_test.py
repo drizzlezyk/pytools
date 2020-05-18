@@ -1,5 +1,4 @@
-import pre
-import plot
+from utils import pre, plot
 
 colormap = 'coolwarm'
 base_path = '/Users/zhongyuanke/Documents/course/data_minig/'

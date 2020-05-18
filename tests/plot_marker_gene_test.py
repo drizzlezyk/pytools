@@ -1,9 +1,6 @@
-import pre
 import scanpy as sc
-import matplotlib.pyplot as plt
-import pandas as pd
-import plot
-from sklearn import preprocessing
+from utils import plot
+
 c_map = 'Purples'
 base_path = '/Users/zhongyuanke/data/'
 fig_size = (20, 3)
