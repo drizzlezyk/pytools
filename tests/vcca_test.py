@@ -1,6 +1,8 @@
 from utils import pre as pp
 from network.vcca import VCCA
 import scanpy as sc
+import tensorflow as tf
+import numpy as np
 
 patience = 5
 epochs = 8
@@ -20,13 +22,20 @@ file_x = 'pbmc/293t/hg19'
 file_y = 'pbmc/293t_jurkat_50_50/hg19'
 adata_x = pp.read_sc_data(base_path+file_x, fmt='10x_mtx')
 adata_y = pp.read_sc_data(base_path+file_x, fmt='10x_mtx')
-sc.pp.filter_genes(adata_x, min_cells=100)
-sc.pp.filter_genes(adata_y, min_cells=100)
-net = VCCA(input_size_x=adata_x.shape[1], input_size_y=adata_x.shape[1], path=result_path, private=False)
+sc.pp.filter_genes(adata_x, min_cells=500)
+sc.pp.filter_genes(adata_y, min_cells=500)
+net = VCCA(input_size_x=adata_x.shape[1], input_size_y=adata_y.shape[1], path=result_path, private=True)
+x = adata_x.X.toarray()
+y = adata_y.X.toarray()
+
+net.inputs_y = tf.convert_to_tensor(y)
 # net = VAE(input_size=adata_all.shape[1], path=result_path, patience=patience)
 net.build()
 net.compile()
-net.train(adata_x, adata_y, epochs=epochs)
+
+print(x.shape)
+print(y.shape)
+net.train(x, y, epochs=epochs)
 
 # net.encoder.load_weights(result_path+"vae_weights.h5")
 # net.decoder.load_weights(result_path+"decoder_weights.h5")
